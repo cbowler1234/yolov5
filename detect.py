@@ -69,7 +69,12 @@ def detect(save_img=False):
 
         # Inference
         t1 = time_synchronized()
+        start = time.time()
         pred = model(img, augment=opt.augment)[0]
+        stop = time.time()
+        duration = stop - start
+        print(f"model time is {duration}")
+        
 
         # Apply NMS
         pred = non_max_suppression(pred, opt.conf_thres, opt.iou_thres, classes=opt.classes, agnostic=opt.agnostic_nms)
